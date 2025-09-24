@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Monthsary, Ace 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#ef4444;--bg2:#f43f5e;--bg3:#ec4899;--card:rgba(255,255,255,.10);--stroke:rgba(255,255,255,.22);--text:#fff;--muted:rgba(255,255,255,.85);--shadow:0 12px 40px rgba(0,0,0,.28);--radius:22px}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:
+radial-gradient(120% 100% at 10% 0%,var(--bg1),transparent 40%),
+radial-gradient(140% 100% at 100% 0%,var(--bg2),transparent 45%),
+linear-gradient(180deg,rgba(255,255,255,0),var(--bg3));overflow-x:hidden}
+.container{max-width:1100px;margin-inline:auto;padding:56px 20px 120px}
+.card{background:var(--card);border:1px solid var(--stroke);backdrop-filter:blur(10px);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
+.section-title{margin:0 0 8px;font-weight:800}
+.hero{display:grid;gap:18px}
+@media(min-width:900px){.hero{grid-template-columns:1.3fr .9fr}}
+.hero h1{margin:0;font-size:clamp(26px,6vw,44px);font-weight:800}
+.grad{background:linear-gradient(90deg,#fff,#ffd1d1,#ff9dc2,#ffd6e7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{color:var(--muted)}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.badge{font-size:12px;border:1px solid var(--stroke);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12)}
+.hero-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;padding:10px 14px;cursor:pointer;background:#fff;color:#111;font-weight:700;box-shadow:0 10px 20px rgba(0,0,0,.25);transition:transform .12s ease}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-ghost{background:transparent;border:1px solid var(--stroke);color:var(--text)}
+.btn.block{display:block;width:100%;margin-top:10px}
+
+.stats{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:600px){.stats{grid-template-columns:1fr 1fr 1fr}}
+.stat{background:rgba(255,255,255,.08);border:1px solid var(--stroke);border-radius:16px;padding:12px;text-align:center}
+.stat-num{font-size:clamp(18px,4.8vw,28px);font-weight:800}
+.stat-label{font-size:12px;color:var(--muted)}
+.clocks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.clock-label{font-size:12px;color:var(--muted)}
+.clock-time{font-size:20px;font-weight:700}
+
+/* smaller carousel for your vertical photos */
+.carousel{position:relative;max-width:320px;margin:0 auto}
+.viewport{overflow:hidden;border-radius:14px;border:1px solid var(--stroke)}
+.track{display:flex;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.slide{min-width:100%;max-height:380px;background:#000;position:relative}
+.slide img{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.slide .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.2))}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.12);backdrop-filter:blur(8px);cursor:pointer;color:var(--text)}
+.prev{left:-48px}.next{right:-48px}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.3)}
+.dot.active{background:#fff}
+.caption{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+
+/* wheel */
+.wheel-wrap{display:grid;place-items:center;margin:8px 0}
+.wheel{width:min(280px,70vw);aspect-ratio:1/1;border-radius:50%;border:2px solid var(--stroke);
+background:conic-gradient(#fff 0 45deg,#ffd1d1 45deg 90deg,#ff9dc2 90deg 135deg,#ffd6e7 135deg 180deg,#fff 180deg 225deg,#ffd1d1 225deg 270deg,#ff9dc2 270deg 315deg,#ffd6e7 315deg 360deg);
+position:relative;transition:transform 1.8s cubic-bezier(.2,.8,.2,1)}
+.wheel::after{content:'▲';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:14px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+.result{text-align:center;margin-top:8px}
+
+/* coupons */
+.coupons{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.coupon{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:16px;border:1px dashed rgba(255,255,255,.55);background:rgba(255,255,255,.10)}
+.coupon .tag{font-size:12px;border:1px solid var(--stroke);padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.12)}
+.coupon.redeemed{opacity:.78;filter:saturate(.75)}
+
+/* modal */
+.modal{border:none;border-radius:20px;padding:0;width:min(720px,92vw);background:rgba(255,255,255,.1);backdrop-filter:blur(12px);color:var(--text);box-shadow:var(--shadow)}
+.modal::backdrop{background:rgba(0,0,0,.55)}
+.modal-card{padding:16px 16px 20px}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid var(--stroke);margin-bottom:12px}
+
+/* hearts background */
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.heart{position:absolute;opacity:0;transform:translateY(-40px);font-size:14px;animation:fall linear forwards}
+@keyframes fall{0%{opacity:0;transform:translateY(-40px)}10%{opacity:.9}90%{opacity:.9}100%{opacity:0;transform:translateY(110vh)}}
+
+/* cat */
+#cat{position:fixed;bottom:12px;left:14px;width:100px;height:100px;z-index:10000;cursor:pointer}
+#cat svg{width:100%;height:100%;display:block}
+#cat .eye{transform-origin:center;animation:blink 6s infinite}
+@keyframes blink{0%,97%,100%{transform:scaleY(1)}98%{transform:scaleY(.1)}}
+.cat-heart{position:absolute;bottom:96px;left:50%;transform:translateX(-50%) scale(.9);font-size:30px;opacity:0;animation:floatHeart 1.6s ease-out forwards}
+@keyframes floatHeart{0%{opacity:0;transform:translateY(0) scale(.9)}20%{opacity:1;transform:translateY(-16px) scale(1)}100%{opacity:0;transform:translateY(-92px) scale(1.4)}}
+
+.footer{text-align:center;margin-top:10px;color:var(--muted)}
+.tiny{font-size:12px}
+</style>
+</head>
+<body>
+<div id="hearts" aria-hidden="true"></div>
+
+<main class="container">
+  <!-- HEADER -->
+  <header class="hero card">
+    <div class="hero-text">
+      <h1>Happy <span class="grad">Monthsary</span> 🎉</h1>
+      <p class="subtitle">For <strong id="recipientName">Ace</strong> — from <strong id="senderName">Hưng</strong><br><span id="monthsaryDateLabel"></span></p>
+      <div class="badges">
+        <span class="badge">💞 Long distance</span>
+        <span class="badge">🌏 Perth ↔ Manila</span>
+      </div>
+      <div class="hero-actions">
+        <button id="confettiBtn" class="btn">🎊 Celebrate!</button>
+        <button id="openLetterBtn" class="btn btn-ghost">💌 Open my letter</button>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="daysTogether">0</div><div class="stat-label">days together</div></div>
+      <div class="stat"><div class="stat-num" id="countdownNext">00d:00h:00m:00s</div><div class="stat-label">to next 24th</div></div>
+      <div class="stat clocks">
+        <div><div class="clock-label">Perth</div><div class="clock-time" id="timePerth">--:--</div></div>
+        <div><div class="clock-label">Manila</div><div class="clock-time" id="timeManila">--:--</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PHOTOS -->
+  <section class="card">
+    <h2 class="section-title">Our memories 📷</h2>
+    <div class="carousel">
+      <button class="nav prev" id="prevPhoto" aria-label="Previous photo">‹</button>
+      <div class="viewport"><div class="track" id="photoTrack"></div></div>
+      <button class="nav next" id="nextPhoto" aria-label="Next photo">›</button>
+    </div>
+    <div class="dots" id="dots"></div>
+    <p class="caption" id="photoCaption">—</p>
+  </section>
+
+  <!-- COUPONS -->
+  <section class="card">
+    <h2 class="section-title">Love coupons 🎟️</h2>
+    <ul class="coupons" id="couponList"></ul>
+  </section>
+
+  <!-- WHEEL -->
+  <section class="card">
+    <h2 class="section-title">Spin the wheel 🎡</h2>
+    <div class="wheel-wrap"><div class="wheel" id="wheel"></div></div>
+    <button id="spinBtn" class="btn block">Spin!</button>
+    <p class="result" id="wheelResult">Try your luck 🤭</p>
+  </section>
+
+  <footer class="footer">
+    <p>Made with ❤️ by <span id="footerSender">Hưng</span> • <span id="footerYear"></span></p>
+  </footer>
+</main>
+
+<!-- Letter Modal -->
+<dialog id="letterModal" class="modal">
+  <form method="dialog" class="modal-card">
+    <header class="modal-header">
+      <h3>My Letter 💌</h3>
+      <button class="btn btn-ghost" aria-label="Close">✖</button>
+    </header>
+    <article class="modal-body">
+      <p id="letterText"></p>
+      <p class="right">— <span id="signName"></span></p>
+    </article>
+  </form>
+</dialog>
+
+<!-- Inline SVG Cat -->
+<div id="cat" title="boop me!">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <ellipse cx="60" cy="80" rx="32" ry="26" fill="#fff" opacity=".96"/>
+    <circle cx="60" cy="55" r="22" fill="#fff" />
+    <path d="M46 44 l-6 -10 l10 4 z" fill="#ffd1d1"/><path d="M74 44 l6 -10 l-10 4 z" fill="#ffd1d1"/>
+    <ellipse class="eye" cx="52" cy="56" rx="3.6" ry="4.6" fill="#2a1f1f"/>
+    <ellipse class="eye" cx="68" cy="56" rx="3.6" ry="4.6" fill="#2a1f1f"/>
+    <circle cx="60" cy="62" r="1.8" fill="#ff9dc2"/>
+  </svg>
+</div>
+
+<script>
+/* ===== personalize ===== */
+const config={
+  recipientName:"Ace (Alyssa)",senderName:"Hưng",
+  started:"2025-08-24",
+  monthsaryDateLabel:"Our first month — 24 Aug → 24 Sep 2025",
+  letter:`Happy first monthsary, Ace ❤️ Thank you for choosing me every day even when i made you dissapointed. I’ll keep showing love with actions, not just words. Always yours.`,
+  photos:[
+    {src:"551505076_1431820294560705_3689121382295373554_n.jpg",caption:"Our cute heart pose 💖"},
+    {src:"551788393_1508998277122343_5944002865098788641_n.jpg",caption:"Our kissy face 😘"},
+    {src:"552291726_789704443665066_5761505391317058657_n.jpg",caption:"Happy smiles 😊"},
+    {src:"553210654_768589179496194_5000775840231262238_n.jpg",caption:"Our little moment 🫶"}
+  ],
+  coupons:[
+    {id:"c1",label:"Video call movie night",tag:"cozy"},
+    {id:"c2",label:"Read-you-to-sleep voice note",tag:"soft"},
+    {id:"c3",label:"Handwritten letter",tag:"sweet"}
+  ],
+  wheelOptions:["Send flowers 🌹","Post a proud story 📣","Plan surprise 🎁","Game night 🎮","Sunset call 🌅","Photo booth 📸","Care-package list 📦","Long voice note 🎙️"]
+};
+
+const $=s=>document.querySelector(s);
+
+/* basics */
+function initBasics(){
+  $("#recipientName").textContent=config.recipientName;
+  $("#senderName").textContent=config.senderName;
+  $("#footerSender").textContent=config.senderName;
+  $("#footerYear").textContent=new Date().getFullYear();
+  $("#monthsaryDateLabel").textContent=config.monthsaryDateLabel;
+  $("#letterText").textContent=config.letter;
+  $("#signName").textContent=config.senderName;
+  document.title=`Happy Monthsary, ${config.recipientName} 💖`;
+}
+
+/* days & countdown */
+function parseStart(){return new Date(config.started+"T00:00:00")}
+function pad(n){return String(n).padStart(2,"0")}
+function next24(from=new Date()){const n=new Date(from); if(n.getDate()>=24)n.setMonth(n.getMonth()+1); n.setDate(24); n.setHours(0,0,0,0); return n}
+function updateDaysAndCountdown(){
+  const now=new Date(), diff=next24(now)-now;
+  const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+  $("#daysTogether").textContent=Math.floor((now-parseStart())/86400000);
+  $("#countdownNext").textContent=`${pad(d)}d:${pad(h)}h:${pad(m)}m:${pad(s)}s`;
+}
+
+/* clocks */
+function updateClocks(){
+  $("#timePerth").textContent=new Date().toLocaleTimeString("en-AU",{timeZone:"Australia/Perth",hour:"2-digit",minute:"2-digit"});
+  $("#timeManila").textContent=new Date().toLocaleTimeString("en-PH",{timeZone:"Asia/Manila",hour:"2-digit",minute:"2-digit"});
+}
+
+/* photos */
+let currentSlide=0;
+function initCarousel(){
+  const track=$("#photoTrack"); track.innerHTML="";
+  config.photos.forEach(p=>{const d=document.createElement("div"); d.className="slide"; d.innerHTML=`<img src="${p.src}" alt=""><div class="overlay"></div>`; track.appendChild(d)});
+  const dots=$("#dots"); dots.innerHTML="";
+  config.photos.forEach((_,i)=>{const d=document.createElement("div"); d.className="dot"; d.onclick=()=>{currentSlide=i;updateCarousel()}; dots.appendChild(d)});
+  $("#prevPhoto").onclick=()=>{currentSlide=(currentSlide-1+config.photos.length)%config.photos.length; updateCarousel()};
+  $("#nextPhoto").onclick=()=>{currentSlide=(currentSlide+1)%config.photos.length; updateCarousel()};
+  updateCarousel();
+}
+function updateCarousel(){
+  $("#photoTrack").style.transform=`translateX(-${currentSlide*100}%)`;
+  $("#photoCaption").textContent=config.photos[currentSlide]?.caption||"";
+  [...document.querySelectorAll(".dot")].forEach((d,i)=>d.classList.toggle("active",i===currentSlide));
+}
+
+/* coupons */
+function initCoupons(){
+  const list=$("#couponList"); list.innerHTML="";
+  const saved=JSON.parse(localStorage.getItem("redeemedCoupons")||"{}");
+  config.coupons.forEach(c=>{
+    const li=document.createElement("li");
+    li.className="coupon"+(saved[c.id]?" redeemed":"");
+    li.innerHTML=`<div><span class="tag">#${c.tag}</span> ${c.label}</div><button class="btn btn-ghost">${saved[c.id]?"✓":"Redeem"}</button>`;
+    li.querySelector("button").onclick=()=>{saved[c.id]=true; localStorage.setItem("redeemedCoupons",JSON.stringify(saved)); li.classList.add("redeemed"); li.querySelector("button").textContent="✓"};
+    list.appendChild(li);
+  });
+}
+
+/* wheel — stable math */
+let spinning=false;
+function initWheel(){
+  const wheel=$("#wheel"), result=$("#wheelResult"); if(!wheel) return;
+  const seg=config.wheelOptions.length, degPer=360/seg; let angle=0;
+  $("#spinBtn").onclick=()=>{
+    if(spinning) return; spinning=true;
+    const choice=Math.floor(Math.random()*seg);
+    const spins=4+Math.floor(Math.random()*3);            // 4–6 spins
+    const center=choice*degPer + degPer/2;                 // center of chosen segment
+    const delta=spins*360 + (360 - center);                // bring center to pointer (top)
+    angle += delta; wheel.style.transform=`rotate(${angle}deg)`;
+    setTimeout(()=>{ result.textContent=config.wheelOptions[choice]; spinning=false; }, 1900);
+  };
+}
+
+/* floating hearts + confetti */
+function initHearts(){
+  const wrap=$("#hearts");
+  function spawn(){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.textContent=Math.random()>.5?"❤️":"💗";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=10+Math.random()*16+"px";
+    const dur=8000+Math.random()*6000;
+    h.style.animationDuration=dur+"ms";
+    h.style.animationDelay=Math.random()*3000+"ms";
+    wrap.appendChild(h);
+    setTimeout(()=>wrap.removeChild(h),dur+3500);
+  }
+  for(let i=0;i<22;i++) spawn();
+  setInterval(spawn,800);
+}
+function confettiBurst(){
+  for(let i=0;i<90;i++){
+    const e=document.createElement("div");
+    Object.assign(e.style,{position:"fixed",left:Math.random()*100+"vw",top:"-10px",width:6+Math.random()*6+"px",height:6+Math.random()*6+"px",background:["#fff","#ffd1d1","#ff9dc2","#ff6b6b"][i%4],borderRadius:"2px",zIndex:9999});
+    const endY=100+Math.random()*20, dur=2200+Math.random()*1200;
+    e.animate([{transform:"translateY(0) rotate(0deg)"},{transform:`translateY(${endY}vh) rotate(${Math.random()*720-360}deg)`}],{duration:dur,easing:"cubic-bezier(.2,.8,.2,1)",fill:"forwards"});
+    document.body.appendChild(e); setTimeout(()=>e.remove(),dur+60);
+  }
+}
+
+/* modal */
+function initModal(){
+  const dialog=$("#letterModal");
+  $("#openLetterBtn").onclick=()=>dialog.showModal();
+  dialog.addEventListener("click",(e)=>{
+    const box=dialog.querySelector(".modal-card").getBoundingClientRect();
+    if(e.clientX<box.left||e.clientX>box.right||e.clientY<box.top||e.clientY>box.bottom) dialog.close();
+  });
+}
+
+/* cat hearts */
+(function initCat(){
+  const cat=$("#cat"); if(!cat) return;
+  function heart(){const h=document.createElement("div"); h.className="cat-heart"; h.textContent=Math.random()<.5?"❤️":"💗"; cat.appendChild(h); setTimeout(()=>h.remove(),1700);}
+  cat.addEventListener("click", heart);
+  setInterval(()=>{ if(Math.random()<.25) heart(); }, 5000);
+})();
+
+/* init all */
+initBasics();
+initCarousel();
+initCoupons();
+initWheel();
+initHearts();
+initModal();
+updateDaysAndCountdown();
+updateClocks();
+setInterval(updateDaysAndCountdown,1000);
+setInterval(updateClocks,1000);
+$("#confettiBtn").addEventListener("click", confettiBurst);
+</script>
+</body>
+</html>
